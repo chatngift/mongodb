@@ -1,17 +1,17 @@
 services:
   - type: web  # Must be "web" type for free tier
-    name: mongodb-raw
+    name: mongodb-render
     env: docker
     plan: free
     dockerfilePath: Dockerfile
+    port: 27017  # Critical for MongoDB
     disk:
       name: mongo_data
       mountPath: /data/db
-      sizeGB: 1  # Free tier max
     envVars:
       - key: MONGO_INITDB_ROOT_USERNAME
         value: admin
-      - key: MONGO_INITDB_ROOT_PASSWORD  # Set your password manually here
-        value: PSObN50jU1qYyqa  # CHANGE THIS
+      - key: MONGO_INITDB_ROOT_PASSWORD
+        value: your_manual_password_here  # CHANGE THIS
       - key: MONGO_INITDB_DATABASE
-        value: cng-prod-mongo-db
+        value: maindb
