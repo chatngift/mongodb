@@ -1,9 +1,17 @@
 services:
-  - type: pserv
-    name: mongodb
+  - type: web  # Must be "web" type for free tier
+    name: mongodb-raw
     env: docker
-    autoDeploy: false
+    plan: free
+    dockerfilePath: Dockerfile
     disk:
-      name: data
+      name: mongo_data
       mountPath: /data/db
-      sizeGB: 10
+      sizeGB: 1  # Free tier max
+    envVars:
+      - key: MONGO_INITDB_ROOT_USERNAME
+        value: admin
+      - key: MONGO_INITDB_ROOT_PASSWORD  # Set your password manually here
+        value: PSObN50jU1qYyqa  # CHANGE THIS
+      - key: MONGO_INITDB_DATABASE
+        value: cng-prod-mongo-db
